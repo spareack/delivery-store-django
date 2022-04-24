@@ -1,0 +1,117 @@
+
+{% extends 'main/base.html' %}
+{% load mathfilters %}
+
+{% block title %}
+	{{ category_name }}
+{% endblock %}
+
+{% block body %}
+<main>
+
+
+
+<div class="default-screen">
+    {% for i in range1 %}
+	<section class="row-objects" style="width: 100%; justify-content: center;">
+		{% for j in range2 %}
+		{% if i|mul:4|add:j < food_list|length %}
+			{% with index=4|mul:i|add:j %}
+			<div class="list-object list-object-parent" onClick="document.location='/meal/{{ food_list|get_i:index }}'">
+				<div class="list-object-category" style="background-image: url('/static/media/food/{{food_list|get_v:index}}');"></div>
+					<div style="max-width: 80%;"> <h5> {{ food_list|get_n:index }} </h5> </div>
+					<div style="margin-left: 0em; display: flex; flex-direction: raw;">
+						<div style="color: #000; margin-right: 8px;"> <h4> {{ food_list|get_p:index }} &#x20bd; </h4> </div>
+						<span style="display: flex; align-items: flex-end; margin-bottom: 8px;"> <h7 >{{ food_list|get_w:index }} гр </h7> </span>
+					</div>
+			</div>
+			{% endwith %}
+		{% else %}
+			<div class="list-object list-object-parent" style="visibility: hidden;">
+				<div class="list-object-category" style=""></div>
+				<div style="max-width: 80%;"> <h5>  </h5> </div>
+				<div style="margin-left: 0em; display: flex; flex-direction: raw;">
+					<div style="color: #000; margin-right: 8px;"> <h4> &#x20bd; </h4> </div>
+					<span style="display: flex; align-items: flex-end; margin-bottom: 8px;"> <h7 > гр </h7> </span>
+				</div>
+			</div>
+		{% endif %}
+		{% endfor %}
+	</section>
+	{% endfor %}
+</div>
+
+<div class="small-screen">
+    {% for i in range0 %}
+	<section class="row-objects">
+		{% for j in range3 %}
+		{% if i|mul:2|add:j < food_list|length %}
+			{% with index=2|mul:i|add:j %}
+			<div class="list-object list-object-parent" onClick="document.location='/meal/{{ food_list|get_i:index }}'">
+				<div class="list-object-category" style="background-image: url('/static/media/food/{{food_list|get_v:index}}');"></div>
+				<div style="max-width: 80%;"> <h5> {{ food_list|get_n:index }} </h5> </div>
+				<div style="margin-left: 0em; display: flex; flex-direction: raw;">
+					<div style="color: #000; margin-right: 8px;"> <h4> {{ food_list|get_p:index }} &#x20bd; </h4> </div>
+					<span style="display: flex; align-items: flex-end; margin-bottom: 8px;"> <h7 >{{ food_list|get_w:index }} гр </h7> </span>
+				</div>
+			</div>
+			{% endwith %}
+		{% else %}
+			<div class="list-object list-object-parent" style="visibility: hidden;">
+				<div class="list-object-category" style="background-image: url('/static/media/erik1.png');"></div>
+				<div style="max-width: 80%;"> <h5>  </h5> </div>
+				<div style="margin-left: 0em; display: flex; flex-direction: raw;">
+					<div style="color: #000; margin-right: 8px;"> <h4>  &#x20bd; </h4> </div>
+					<span style="display: flex; align-items: flex-end; margin-bottom: 8px;"> <h7 > гр </h7> </span>
+				</div>
+			</div>
+		{% endif %}
+		{% endfor %}
+	</section>
+    {% endfor %}
+</div>
+
+</main>
+<style>
+	.list-object-parent {
+		display: flex;
+        flex-direction: column;
+		justify-content: space-evenly;
+
+		cursor: pointer;
+		width: 30vw;
+		height: 30vw;
+
+		margin: 0 10px;
+		min-height: 370px;
+		max-height: 390px;
+
+		background-color: #fff;
+        box-shadow: 0 10px 150px rgba(0,0,0,0.1);
+		align-items: center;
+	}
+	.list-object-category {
+		width: 85%;
+		height: 90%;
+
+		max-height: 200px;
+
+        background-color: #fff;
+		border-radius: 20px;
+
+<!--		box-shadow: 0 0px 10px rgba(0,0,0,0.05);-->
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 20px;
+		margin-bottom: 20px;
+
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.list-object-parent:hover {
+		box-shadow: 0 0px 10px rgba(0,0,0,0.2);
+	}
+</style>
+
+{% endblock %}

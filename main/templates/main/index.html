@@ -1,0 +1,104 @@
+
+{% extends 'main/base.html' %}
+{% load mathfilters %}
+
+{% block title %}
+    Sushi
+{% endblock %}
+
+
+{% block body %}
+<main>
+
+<div class="slider-div">
+    <script src="/static/splide/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="/static/splide/dist/css/splide.min.css">
+
+    <div class="splide1 def-slider" style="height: 15vw; margin-bottom: 40px;">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide" style="background-image: url('/static/media/banner.png'); height: 15vw; background-size: cover;"></li>
+                <li class="splide__slide" style="background-image: url('/static/media/banner.png'); height: 15vw; background-size: cover;"></li>
+                <li class="splide__slide" style="background-image: url('/static/media/banner.png'); height: 15vw; background-size: cover;"></li>
+            </ul>
+        </div>
+        <script>
+            document.addEventListener( 'DOMContentLoaded', function() {
+                var splide = new Splide( '.splide1', {autoplay : true, rewind : true, arrows: false, pagination: false});
+                splide.mount();
+            });
+        </script>
+    </div>
+        <div class="splide2 small-slider" style="width: 70vw; margin-bottom: 10px; display: none;">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide" style="background-image: url('/static/media/small-banner.png'); height: 41.5vw; width: 70vw; background-size: contain;"></li>
+                <li class="splide__slide" style="background-image: url('/static/media/small-banner.png'); height: 41.5vw; width: 70vw; background-size: contain;"></li>
+                <li class="splide__slide" style="background-image: url('/static/media/small-banner.png'); height: 41.5vw; width: 7vw; background-size: contain;"></li>
+            </ul>
+        </div>
+        <script>
+            document.addEventListener( 'DOMContentLoaded', function() {
+                var splide = new Splide( '.splide2', {autoplay : true, rewind : true, arrows: false, pagination: false});
+                splide.mount();
+            });
+        </script>
+    </div>
+</div>
+
+
+
+<div class="default-screen">
+    {% for i in range1 %}
+    <section class="row-objects" style="">
+        {% for j in range2  %}
+            {% if categories|length > 4|mul:i|add:j %}
+                {% with index=4|mul:i|add:j %}
+                <div class="list-object list-object-image" style="width: 100px; background-image: url('static/media/category/{{ categories|get_v:index }}');">
+                    <a href="/category/{{ 4|mul:i|add:j|add:1 }}" style="display: block; text-align: center; height: 100%;"></a>
+                </div>
+                {% endwith %}
+            {% else %}
+                <div class="list-object list-object-image" style="visibility: hidden;">
+                    <a href="/category/1" style="display: block; text-align: center; height: 100%;"></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </section>
+    {% endfor %}
+</div>
+
+<div class="small-screen">
+    {% for i in range0 %}
+    <section class="row-objects">
+        {% for j in range3 %}
+            {% if 2|mul:i|add:j < categories|length %}
+                {% with index=2|mul:i|add:j %}
+                <div class="list-object list-object-image" style="background-image: url('static/media/category/{{ categories|get_v:index }}');">
+                    <a href="/category/{{ 2|mul:i|add:j|add:1 }}" style="display: block; text-align: center; height: 100%;"></a>
+                </div>
+                {% endwith %}
+            {% else %}
+                <div class="list-object list-object-image" style="visibility: hidden;">
+                    <a href="/category/1" style="display: block; text-align: center; height: 100%;"></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </section>
+    {% endfor %}
+</div>
+
+
+</main>
+<style>
+    .list-object:hover {
+        box-shadow: 0 0px 10px rgba(0,0,0,0.2);
+    }
+    .list-object-image {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: white;
+
+    }
+</style>
+{% endblock %}
