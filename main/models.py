@@ -12,4 +12,4 @@ class Food(models.Model):
     price = models.CharField(max_length=10, default="None")
     weight = models.CharField(max_length=10, default="None")
     description = models.TextField(default="None")
-    filename = models.TextField(default="-1.png")
+    filename = models.ImageField(default="-1.png")
